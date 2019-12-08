@@ -18,24 +18,30 @@ Route::get('/', function () {
 
 //Grupo de rutas
 Route::group(
-    ["prefix"=> 'admin'],   //genera en el path /admin
-    function(){
+    ["prefix" => 'admin'],   //genera en el path /admin
+    function () {
+
+
+        Route::get('/test', function () {
+            $name = 'Gustavo Marquez';
+            return view('test')->with('name', $name);//Con with le pasamos parametros a la vista
+        });
 
         //Ruta pasando por parametros
-        Route::get('/test/{name}/{surname?}', function($name, $surname = 'Marrquez'){
+        Route::get('/test/{name}/{surname?}', function ($name, $surname = 'Marrquez') {
             return "<h1>Nombre: $name</h1><h1>Apellido: $surname</h1> ";
         })->where('name', '[A-Za-z]+');  //Especificando los valores posibles con exprecion regular
 
-});
+    });
 
 
 //Ruta que recibe cualquier verbo
-Route::any('cualquier-verbo', function(){
-  return  "<h1>Cualquier verbo</h1>";
+Route::any('cualquier-verbo', function () {
+    return "<h1>Cualquier verbo</h1>";
 });
 
 //Especfiicando varios verbos
-Route::match(['get','post'],'/ruta-match',function(){
+Route::match(['get', 'post'], '/ruta-match', function () {
     return "Ruta que recibe los verbos GET y POST";
 })->name('solo-get-post');  // le añadimos un nombre a la ruta
 
