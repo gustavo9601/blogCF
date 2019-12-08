@@ -29,5 +29,10 @@
     @endforeach
 </ul>
 
+<hr>
+{{--Con lang accedemos a la carpeta lang/idioma y seleccionamos la respuesta de acuerdo al indice del arreglo--}}
+<h3>@lang('personalizado.titulo-lang')</h3>
+
+
 </body>
 </html>
