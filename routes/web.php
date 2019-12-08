@@ -24,7 +24,9 @@ Route::group(
 
         Route::get('/test', function () {
             $name = 'Gustavo Marquez';
-            return view('test')->with('name', $name);//Con with le pasamos parametros a la vista
+            $numeros = [1,2,3,4];
+            return view('test', compact("name", "numeros"));//Con compact le pasamos varios parametros entre ""
+            //return view('test')->with('name', $name);//Con with le pasamos parametros a la vista
         });
 
         //Ruta pasando por parametros
