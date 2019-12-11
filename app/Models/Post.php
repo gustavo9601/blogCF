@@ -11,4 +11,20 @@ class Post extends Model
     protected $fillable = [
         'title' , 'content', 'user_id'
     ];
+
+
+    public function user(){
+        //Buscara el usuario que creo el post
+        return $this->belongsTo('App\User', 'user_id');
+        //return $this->belongsTo('Modelo a comparar', 'llave foranea actual, que se relaciona al modelo a comparar');
+    }
+
+    public function comments(){
+        //Buscara todos los comentarios que tiene el post
+        return $this->hasMany('App\Models\Comment', 'post_id', 'id');
+        //return $this->hasMany('Modelo a cruzar con el actual', 'llave foranea a comprar', 'llave del modelo actual');
+
+    }
+
+
 }

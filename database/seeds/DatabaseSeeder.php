@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         //Registrando un seeder
         $this->call(UsersTableSeeder::class);
         $this->call(PostTableSeeder::class);
+        $this->call(CommentTableSeeder::class);
     }
 
 //Funcion para vaciar las tablas

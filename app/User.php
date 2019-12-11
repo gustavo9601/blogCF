@@ -36,4 +36,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //Devolvera todos los post que un usuario tiene asociado
+    public function posts()
+    {
+        //hasMany(Modelo a comparar) ira a buscar todos los post que concuerden con el id del usuario en la tabla posts
+        return $this->hasMany('App\Models\Post', 'user_id', 'id');
+
+        //return $this->hasMany('Modelo a cruzar con el actual', 'llave foranea a comprar', 'llave del modelo actual');
+    }
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment', 'user_id', 'id');
+    }
+
 }

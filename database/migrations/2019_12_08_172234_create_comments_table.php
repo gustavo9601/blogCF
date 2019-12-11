@@ -24,6 +24,7 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->text('content');
             $table->timestamps();
+
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')->on('users')->onDelete('cascade');  //creando la relacion del id con el usuario en cascada
