@@ -5,4 +5,7 @@
                         {{$post->title}}
                 </li>
         @endforeach
+
+    {{--Muestra las flechas de navegacion--}}
+    {{ $posts->links() }}
 </ul>
