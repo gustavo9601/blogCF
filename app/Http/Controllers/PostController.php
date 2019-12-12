@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\UserFormRequest;
+
 class PostController extends Controller
 {
     /**
@@ -25,24 +27,61 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+
+    /*
+     *
+     * Cambiamos el request por el UserFormRequest
+     * ya que hay tenemos las reglas de validacion y mensajes del formulario
+     * */
+    public function store(UserFormRequest $request)
     {
-        //
+
+
+        /*$reglas = [
+            'title' => 'required|min:5|max:10',
+            'content' => 'required|min:5|max:50'
+        ];
+        $validacion = \Validator::make($request->all(), $reglas);
+
+        if($validacion->fails()){
+
+            //dd($validacion);
+            return redirect()->route('posts.create')
+                ->withErrors($validacion)
+                ->withInput();
+        }*/
+
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->user_id = 1;
+
+        $post->save();
+
+        return $post->id;
+
+        //dd($request->all());
+
+        /*return response()->json(['test' => 'true']);
+
+        return $request->input('name', 'valor por default');
+  */
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -53,7 +92,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,8 +103,8 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -76,7 +115,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
