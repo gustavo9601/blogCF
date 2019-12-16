@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h1>Welcome{{ $user->name }}</h1>
+<h1>Welcome{{ (@$user->name) ? $user->name : $user['name'] }}</h1>
 
 
 </body>
