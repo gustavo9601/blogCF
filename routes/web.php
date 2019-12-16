@@ -88,6 +88,20 @@ Rutas desde controlador
 
 Route::get('/cargar-usuarios', 'TestController@index');
 
+//Ruta que se usa como ejemplo para crear las colas
+use App\Jobs\ColasEmailTest;
+Route::get('/colas', function(){
+    ColasEmailTest::dispatch();     //Con la funcion dispatch es como llamar al contructor ($parametros)
+                                    // y almacena la tarea en la tabla de la BD, para despues ejecutarla
+    return "Almacenadas las colas correctamente";
+});
+
+//ruta para ejecutar las colas
+Route::get('ejecutar-colas', function(){
+    var_dump(Artisan::call('queue:work'));
+
+    //php artisan queue:work  //comando para ejecutar colas
+});
 
 Route::resource('/posts', 'PostController');
 Auth::routes();
