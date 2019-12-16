@@ -87,7 +87,10 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $post = Post::find($id);
+
+        return view('post.show', compact('post'));
     }
 
     /**
@@ -119,8 +122,10 @@ class PostController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();  //eliminamos el pos
+
+        return redirect()->route('posts.index');
     }
 }
